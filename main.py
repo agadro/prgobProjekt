@@ -51,7 +51,9 @@ def deszyfruj_base64(txt):
 okno = Tk()
 okno.title("Lockify")
 okno.geometry("300x300")
-okno.iconphoto("dcw")
+okno.iconbitmap(r'favicon.ico')
+
+
 
 # tworzenie podzialu
 
