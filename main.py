@@ -52,7 +52,7 @@ okno = Tk()
 okno.title("Lockify")
 okno.geometry("300x300")
 okno.iconbitmap(r'favicon.ico')
-x=1
+
 
 
 # tworzenie podzialu
