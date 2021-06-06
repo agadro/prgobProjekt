@@ -50,7 +50,7 @@ class Cezar:
         return odszyfrowany
 
 
-# szyfrowanie i deszyfrowanie metodą Base64
+# szyfrowanie i deszyfrowanie meodą Base64
 class Base64:
     def __init__(self):
         pass
