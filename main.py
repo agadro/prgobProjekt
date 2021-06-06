@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import Tk
 import base64
+import tkinter.font as font
 
 # szyfrowanie i deszyfrowanie metodą Cezara
 
@@ -50,8 +51,10 @@ def deszyfruj_base64(txt):
 
 okno = Tk()
 okno.title("Lockify")
-okno.geometry("300x300")
+okno.geometry("400x400")
 okno.iconbitmap(r'favicon.ico')
+okno.configure(bg='black')
+# okno.background
 
 
 
@@ -59,8 +62,11 @@ okno.iconbitmap(r'favicon.ico')
 
 topFrame = Frame(okno)
 topFrame.pack()
+topFrame.configure(bg='blue')
 bottomFrame = Frame(okno)
 bottomFrame.pack(side=BOTTOM)
+bottomFrame.configure(bg='black')
+
 
 # tworzenie okna do wprowadzania danych
 
@@ -92,24 +98,42 @@ class Szyfruj:
         et_szyfrowanie = Label(okno, text=deszyfruj_base64(self.pozyskany_tekst2))
         et_szyfrowanie.pack()
 
-
+myFont = font.Font(family='Verdana')
 # tworzenie przyciskow i przypisywanie do nich funkcji
 
-podaj_slowo = Label(topFrame, text='Podaj słowo')
+podaj_slowo = Label(topFrame, text='Podaj słowo', relief=RIDGE, background='yellow')
 
 szyfr = Szyfruj()
-przycisk_sz_cezar = Button(bottomFrame, text='Szyfr Cezara', command=szyfr.et_szyfr_cezar)
-przycisk_desz_cezar = Button(bottomFrame, text='Deszyfrowanie Cezar', command=szyfr.et_deszyfr_cezar)
+przycisk_sz_cezar = Button(bottomFrame, text='Szyfr Cezara', command=szyfr.et_szyfr_cezar,
+                           background='yellow',activebackground='black', activeforeground='yellow',
+                           relief=FLAT
+                           )
+przycisk_desz_cezar = Button(bottomFrame, text='Deszyfrowanie Cezar', command=szyfr.et_deszyfr_cezar,
+                             background='yellow', activebackground='black', activeforeground='yellow',
+                             relief=FLAT
+                             )
 
-przycisk_sz_base64 = Button(bottomFrame, text='Szyfr Base64', command=szyfr.et_szyfr_base64)
-przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=szyfr.et_deszyfr_base64)
+przycisk_sz_base64 = Button(bottomFrame, text='Szyfr Base64', command=szyfr.et_szyfr_base64,
+                            background='yellow', activebackground='black', activeforeground='yellow',
+                            relief=FLAT
+                            )
+
+przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=szyfr.et_deszyfr_base64,
+                              background='yellow', activebackground='black', activeforeground='yellow',
+                              relief=FLAT
+                              )
 
 podaj_slowo.pack(side=TOP)
 
-przycisk_sz_cezar.grid(row=1, column=1)
-przycisk_desz_cezar.grid(row=1, column=2)
+przycisk_sz_cezar['font'] = myFont
+przycisk_desz_cezar['font'] = myFont
+przycisk_sz_base64['font'] = myFont
+przycisk_desz_base64['font'] = myFont
 
-przycisk_sz_base64.grid(row=2, column=1)
-przycisk_desz_base64.grid(row=2, column=2)
+przycisk_sz_cezar.grid(row=1, column=1, padx=5, pady=5)
+przycisk_desz_cezar.grid(row=1, column=2, padx=5, pady=5)
+
+przycisk_sz_base64.grid(row=2, column=1, padx=5, pady=5)
+przycisk_desz_base64.grid(row=2, column=2, padx=5, pady=5)
 
 okno.mainloop()
