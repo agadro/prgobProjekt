@@ -10,6 +10,7 @@ key = 'C'
 
 
 def szyfruj_lub_deszyfruj(input_txt):
+    input_txt = input_txt.upper()
     output_txt = []
     for pos in range(0, len(input_txt)):
         letter_row = 'A'
@@ -24,6 +25,7 @@ def szyfruj_lub_deszyfruj(input_txt):
 
 
 def szyfruj_cezar(txt):
+    txt = txt.lower()
     zaszyfrowny = ""
     for i in range(len(txt)):
         if ord(txt[i]) > 122 - KLUCZ:
@@ -91,34 +93,60 @@ wprowadz_tekst.pack(side=TOP)
 
 class Szyfruj:
     def __init__(self):
-        pass
+        self.pozyskany_tekst = ''
+        self.pozyskany_tekst2 = ''
+        self.pozyskany_tekst3 = ''
 
     def et_szyfr_cezar(self):
-        et_szyfrowanie = Label(okno, text=szyfruj_cezar(wprowadz_tekst.get()))
-        self.pozyskany_tekst = szyfruj_cezar(wprowadz_tekst.get())
-        et_szyfrowanie.pack()
+        if not wprowadz_tekst.get():
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=szyfruj_cezar(wprowadz_tekst.get()))
+            self.pozyskany_tekst = szyfruj_cezar(wprowadz_tekst.get())
+            et_szyfrowanie.pack()
 
     def et_deszyfr_cezar(self):
-        et_szyfrowanie = Label(okno, text=deszyfruj_cezar(self.pozyskany_tekst))
-        et_szyfrowanie.pack()
+        if not self.pozyskany_tekst:
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=deszyfruj_cezar(self.pozyskany_tekst))
+            et_szyfrowanie.pack()
 
     def et_szyfr_base64(self):
-        et_szyfrowanie = Label(okno, text=szyfruj_base64(wprowadz_tekst.get()))
-        self.pozyskany_tekst2 = szyfruj_base64(wprowadz_tekst.get())
-        et_szyfrowanie.pack()
+        if not wprowadz_tekst.get():
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=szyfruj_base64(wprowadz_tekst.get()))
+            self.pozyskany_tekst2 = szyfruj_base64(wprowadz_tekst.get())
+            et_szyfrowanie.pack()
 
     def et_deszyfr_base64(self):
-        et_szyfrowanie = Label(okno, text=deszyfruj_base64(self.pozyskany_tekst2))
-        et_szyfrowanie.pack()
+        if not self.pozyskany_tekst:
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=deszyfruj_base64(self.pozyskany_tekst2))
+            et_szyfrowanie.pack()
 
     def et_szyfruj(self):
-        et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(wprowadz_tekst.get()))
-        self.pozyskany_tekst3 = szyfruj_lub_deszyfruj(wprowadz_tekst.get())
-        et_szyfrowanie.pack()
+        if not wprowadz_tekst.get():
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(wprowadz_tekst.get()))
+            self.pozyskany_tekst3 = szyfruj_lub_deszyfruj(wprowadz_tekst.get())
+            et_szyfrowanie.pack()
 
     def et_deszyfruj(self):
-        et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(self.pozyskany_tekst2))
-        et_szyfrowanie.pack()
+        if not self.pozyskany_tekst:
+            et_szyfrowanie = Label(okno, text='WPISZ TEKST')
+            et_szyfrowanie.pack()
+        else:
+            et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(self.pozyskany_tekst3))
+            et_szyfrowanie.pack()
 
 
 myFont = font.Font(family='Verdana')
@@ -146,12 +174,12 @@ przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=
                               relief=FLAT
                               )
 
-przycisk_sz_4kw = Button(bottomFrame, text='Szyfr 4kwadratowy', command=szyfr.et_szyfruj_lub_deszyfruj,
+przycisk_sz_4kw = Button(bottomFrame, text='Szyfr Beauforta', command=szyfr.et_szyfruj,
                          background='yellow', activebackground='black', activeforeground='yellow',
                          relief=FLAT
                          )
 
-przycisk_desz_4kw = Button(bottomFrame, text='Deszyfrowanie 4kwadratowy', command=szyfr.et_szyfruj_lub_deszyfruj,
+przycisk_desz_4kw = Button(bottomFrame, text='Deszyfrowanie Beauforta', command=szyfr.et_deszyfruj,
                            background='yellow', activebackground='black', activeforeground='yellow',
                            relief=FLAT
                            )
