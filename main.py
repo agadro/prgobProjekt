@@ -3,65 +3,73 @@ from tkinter import Tk
 import base64
 import tkinter.font as font
 
-# szyfrowanie i deszyfrowanie metodą Cezara
-
-KLUCZ = 3
-key = 'C'
 
 
-def szyfruj_lub_deszyfruj(input_txt):
-    input_txt = input_txt.upper()
-    output_txt = []
-    for pos in range(0, len(input_txt)):
-        letter_row = 'A'
-        letter_txt = input_txt[pos]
-        while letter_txt != key[pos % len(key)]:
-            letter_txt = chr((ord(letter_txt) - ord('A') + 1) % 26
-                             + ord('A'))
-            letter_row = chr((ord(letter_row) - ord('A') + 1) % 26
-                             + ord('A'))
-        output_txt.append(letter_row)
-    return ''.join(output_txt)
+class Beaufort:
+    def __init__(self):
+        self.key = 'C'
 
 
-def szyfruj_cezar(txt):
-    txt = txt.lower()
-    zaszyfrowny = ""
-    for i in range(len(txt)):
-        if ord(txt[i]) > 122 - KLUCZ:
-            zaszyfrowny += chr(ord(txt[i]) + KLUCZ - 26)
-        else:
-            zaszyfrowny += chr(ord(txt[i]) + KLUCZ)
-    return zaszyfrowny
+    def szyfruj_lub_deszyfruj(self, input_txt):
+        input_txt = input_txt.upper()
+        output_txt = []
+        for pos in range(0, len(input_txt)):
+            letter_row = 'A'
+            letter_txt = input_txt[pos]
+            while letter_txt != self.key[pos % len(self.key)]:
+                letter_txt = chr((ord(letter_txt) - ord('A') + 1) % 26
+                                 + ord('A'))
+                letter_row = chr((ord(letter_row) - ord('A') + 1) % 26
+                                 + ord('A'))
+            output_txt.append(letter_row)
+        return ''.join(output_txt)
+
+class Cezar:
+    def __init__(self):
+        self.KLUCZ = 3
+
+    def szyfruj_cezar(self, txt):
+        txt = txt.lower()
+        zaszyfrowny = ""
+        for i in range(len(txt)):
+            if ord(txt[i]) > 122 - self.KLUCZ:
+                zaszyfrowny += chr(ord(txt[i]) + self.KLUCZ - 26)
+            else:
+                zaszyfrowny += chr(ord(txt[i]) + self.KLUCZ)
+        return zaszyfrowny
 
 
-def deszyfruj_cezar(tekst):
-    odszyfrowany = ""
-    KLUCZM = KLUCZ % 26
-    for znak in tekst:
-        if ord(znak) - KLUCZM < 97:
-            odszyfrowany += chr(ord(znak) - KLUCZM + 26)
-        else:
-            odszyfrowany += chr(ord(znak) - KLUCZM)
-    return odszyfrowany
+    def deszyfruj_cezar(self, tekst):
+        odszyfrowany = ""
+        KLUCZM = self.KLUCZ % 26
+        for znak in tekst:
+            if ord(znak) - KLUCZM < 97:
+                odszyfrowany += chr(ord(znak) - KLUCZM + 26)
+            else:
+                odszyfrowany += chr(ord(znak) - KLUCZM)
+        return odszyfrowany
 
 
 # szyfrowanie i deszyfrowanie metodą Base64
-
-def szyfruj_base64(txt):
-    message = txt
-    message_bytes = message.encode('ascii')
-    base64_bytes = base64.b64encode(message_bytes)
-    base64_message = base64_bytes.decode('ascii')
-    return base64_message
+class Base64:
+    def __init__(self):
+        pass
 
 
-def deszyfruj_base64(txt):
-    base64_message = txt
-    base64_bytes = base64_message.encode('ascii')
-    message_bytes = base64.b64decode(base64_bytes)
-    message = message_bytes.decode('ascii')
-    return message
+    def szyfruj_base64(self, txt):
+        message = txt
+        message_bytes = message.encode('ascii')
+        base64_bytes = base64.b64encode(message_bytes)
+        base64_message = base64_bytes.decode('ascii')
+        return base64_message
+
+
+    def deszyfruj_base64(self, txt):
+        base64_message = txt
+        base64_bytes = base64_message.encode('ascii')
+        message_bytes = base64.b64decode(base64_bytes)
+        message = message_bytes.decode('ascii')
+        return message
 
 
 # tworzenie okna aplikacji i ustawienie jego domyslnych wymiarow
@@ -103,44 +111,48 @@ class Szyfruj:
         self.pozyskany_tekst2 = ''
         self.pozyskany_tekst3 = ''
 
+        self.cezar = Cezar()
+        self.beafort = Beaufort()
+        self.base64 = Base64()
+
     def et_szyfr_cezar(self):
         if not wprowadz_tekst.get():
             mylist.insert(END,"WPISZ TEKST")
         else:
-            self.pozyskany_tekst = szyfruj_cezar(wprowadz_tekst.get())
+            self.pozyskany_tekst = self.cezar.szyfruj_cezar(wprowadz_tekst.get())
             mylist.insert(END, self.pozyskany_tekst)
 
     def et_deszyfr_cezar(self):
         if not self.pozyskany_tekst:
             mylist.insert(END, "WPISZ TEKST")
         else:
-            mylist.insert(END, deszyfruj_cezar(self.pozyskany_tekst))
+            mylist.insert(END, self.cezar.deszyfruj_cezar(self.pozyskany_tekst))
 
     def et_szyfr_base64(self):
         if not wprowadz_tekst.get():
             mylist.insert(END, "WPISZ TEKST")
         else:
-            self.pozyskany_tekst2 = szyfruj_base64(wprowadz_tekst.get())
+            self.pozyskany_tekst2 = self.base64.szyfruj_base64(wprowadz_tekst.get())
             mylist.insert(END, self.pozyskany_tekst2)
 
     def et_deszyfr_base64(self):
         if not self.pozyskany_tekst2:
             mylist.insert(END, "WPISZ TEKST")
         else:
-            mylist.insert(END, deszyfruj_base64(self.pozyskany_tekst2))
+            mylist.insert(END, self.base64.deszyfruj_base64(self.pozyskany_tekst2))
 
     def et_szyfruj(self):
         if not wprowadz_tekst.get():
             mylist.insert(END, "WPISZ TEKST")
         else:
-            self.pozyskany_tekst3 = szyfruj_lub_deszyfruj(wprowadz_tekst.get())
+            self.pozyskany_tekst3 = self.beafort.szyfruj_lub_deszyfruj(wprowadz_tekst.get())
             mylist.insert(END, self.pozyskany_tekst3)
 
     def et_deszyfruj(self):
         if not self.pozyskany_tekst3:
             mylist.insert(END, "WPISZ TEKST")
         else:
-            mylist.insert(END, szyfruj_lub_deszyfruj(self.pozyskany_tekst3))
+            mylist.insert(END, self.beafort.szyfruj_lub_deszyfruj(self.pozyskany_tekst3))
 
 
 def usun():
