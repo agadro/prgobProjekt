@@ -158,31 +158,31 @@ deleteB = Button(bottomFrame, text='Usuń', command=usun)
 
 
 przycisk_sz_cezar = Button(bottomFrame, text='Szyfr Cezara', command=szyfr.et_szyfr_cezar,
-                           background='khaki4', activebackground='black', activeforeground='khaki4',
+                           background='khaki4', activebackground='black', activeforeground='khaki1',
                            relief=FLAT
                            )
 przycisk_desz_cezar = Button(bottomFrame, text='Deszyfrowanie Cezar', command=szyfr.et_deszyfr_cezar,
-                             background='khaki4', activebackground='black', activeforeground='khaki4',
+                             background='khaki4', activebackground='black', activeforeground='khaki1',
                              relief=FLAT
                              )
 
 przycisk_sz_base64 = Button(bottomFrame, text='Szyfr Base64', command=szyfr.et_szyfr_base64,
-                            background='khaki4', activebackground='black', activeforeground='khaki4',
+                            background='khaki4', activebackground='black', activeforeground='khaki1',
                             relief=FLAT
                             )
 
 przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=szyfr.et_deszyfr_base64,
-                              background='khaki4', activebackground='black', activeforeground='khaki4',
+                              background='khaki4', activebackground='black', activeforeground='khaki1',
                               relief=FLAT
                               )
 
 przycisk_sz_4kw = Button(bottomFrame, text='Szyfr Beauforta', command=szyfr.et_szyfruj,
-                         background='khaki4', activebackground='black', activeforeground='khaki4',
+                         background='khaki4', activebackground='black', activeforeground='khaki1',
                          relief=FLAT
                          )
 
 przycisk_desz_4kw = Button(bottomFrame, text='Deszyfrowanie Beaufort', command=szyfr.et_deszyfruj,
-                           background='khaki4', activebackground='black', activeforeground='khaki4',
+                           background='khaki4', activebackground='black', activeforeground='khaki1',
                            relief=FLAT
                            )
 podaj_slowo['font'] = myFont
