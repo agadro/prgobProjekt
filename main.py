@@ -6,6 +6,21 @@ import tkinter.font as font
 # szyfrowanie i deszyfrowanie metodą Cezara
 
 KLUCZ = 3
+key = 'C'
+
+
+def szyfruj_lub_deszyfruj(input_txt):
+    output_txt = []
+    for pos in range(0, len(input_txt)):
+        letter_row = 'A'
+        letter_txt = input_txt[pos]
+        while letter_txt != key[pos % len(key)]:
+            letter_txt = chr((ord(letter_txt) - ord('A') + 1) % 26
+                             + ord('A'))
+            letter_row = chr((ord(letter_row) - ord('A') + 1) % 26
+                             + ord('A'))
+        output_txt.append(letter_row)
+    return ''.join(output_txt)
 
 
 def szyfruj_cezar(txt):
@@ -57,7 +72,6 @@ okno.configure(bg='black')
 # okno.background
 
 
-
 # tworzenie podzialu
 
 topFrame = Frame(okno)
@@ -66,7 +80,6 @@ topFrame.configure(bg='blue')
 bottomFrame = Frame(okno)
 bottomFrame.pack(side=BOTTOM)
 bottomFrame.configure(bg='black')
-
 
 # tworzenie okna do wprowadzania danych
 
@@ -98,6 +111,16 @@ class Szyfruj:
         et_szyfrowanie = Label(okno, text=deszyfruj_base64(self.pozyskany_tekst2))
         et_szyfrowanie.pack()
 
+    def et_szyfruj(self):
+        et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(wprowadz_tekst.get()))
+        self.pozyskany_tekst3 = szyfruj_lub_deszyfruj(wprowadz_tekst.get())
+        et_szyfrowanie.pack()
+
+    def et_deszyfruj(self):
+        et_szyfrowanie = Label(okno, text=szyfruj_lub_deszyfruj(self.pozyskany_tekst2))
+        et_szyfrowanie.pack()
+
+
 myFont = font.Font(family='Verdana')
 # tworzenie przyciskow i przypisywanie do nich funkcji
 
@@ -105,7 +128,7 @@ podaj_slowo = Label(topFrame, text='Podaj słowo', relief=RIDGE, background='yel
 
 szyfr = Szyfruj()
 przycisk_sz_cezar = Button(bottomFrame, text='Szyfr Cezara', command=szyfr.et_szyfr_cezar,
-                           background='yellow',activebackground='black', activeforeground='yellow',
+                           background='yellow', activebackground='black', activeforeground='yellow',
                            relief=FLAT
                            )
 przycisk_desz_cezar = Button(bottomFrame, text='Deszyfrowanie Cezar', command=szyfr.et_deszyfr_cezar,
@@ -123,17 +146,31 @@ przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=
                               relief=FLAT
                               )
 
+przycisk_sz_4kw = Button(bottomFrame, text='Szyfr 4kwadratowy', command=szyfr.et_szyfruj_lub_deszyfruj,
+                         background='yellow', activebackground='black', activeforeground='yellow',
+                         relief=FLAT
+                         )
+
+przycisk_desz_4kw = Button(bottomFrame, text='Deszyfrowanie 4kwadratowy', command=szyfr.et_szyfruj_lub_deszyfruj,
+                           background='yellow', activebackground='black', activeforeground='yellow',
+                           relief=FLAT
+                           )
+
 podaj_slowo.pack(side=TOP)
 
 przycisk_sz_cezar['font'] = myFont
 przycisk_desz_cezar['font'] = myFont
-przycisk_sz_base64['font'] = myFont
-przycisk_desz_base64['font'] = myFont
-
 przycisk_sz_cezar.grid(row=1, column=1, padx=5, pady=5)
 przycisk_desz_cezar.grid(row=1, column=2, padx=5, pady=5)
 
+przycisk_sz_base64['font'] = myFont
+przycisk_desz_base64['font'] = myFont
 przycisk_sz_base64.grid(row=2, column=1, padx=5, pady=5)
 przycisk_desz_base64.grid(row=2, column=2, padx=5, pady=5)
+
+przycisk_sz_4kw['font'] = myFont
+przycisk_desz_4kw['font'] = myFont
+przycisk_sz_4kw.grid(row=3, column=1, padx=5, pady=5)
+przycisk_desz_4kw.grid(row=3, column=2, padx=5, pady=5)
 
 okno.mainloop()
