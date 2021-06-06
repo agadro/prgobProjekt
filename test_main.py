@@ -1,25 +1,21 @@
 from unittest import TestCase
-from main import Szyfruj
+from main import Szyfruj, mylist
+
 
 class TestSzyfruj(TestCase):
     def setUp(self):
         self.szyfruj = Szyfruj()
 
 
-    def test_et_szyfr_cezar(self):
-        pass
+class TestInit(TestSzyfruj):
+    def test_initial_pozyskany_tekst(self):
+        self.assertEqual(self.szyfruj.pozyskany_tekst, '')
 
-    def test_et_deszyfr_cezar(self):
-        pass
+    def test_initial_pozyskany_tekst2(self):
+        self.assertEqual(self.szyfruj.pozyskany_tekst2, '')
 
-    def test_et_szyfr_base64(self):
-        pass
+    def test_initial_pozyskany_tekst3(self):
+        self.assertEqual(self.szyfruj.pozyskany_tekst3, '')
 
-    def test_et_deszyfr_base64(self):
-        pass
 
-    def test_et_szyfruj(self):
-        pass
 
-    def test_et_deszyfruj(self):
-        pass
