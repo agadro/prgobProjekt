@@ -76,9 +76,9 @@ class Base64:
 
 okno = Tk()
 okno.title("Lockify")
-okno.geometry("400x500")
+okno.geometry("430x500")
 okno.iconbitmap(r'favicon.ico')
-okno.configure(bg='khaki3')
+okno.configure(bg='gainsboro')
 # okno.background
 
 
@@ -86,20 +86,20 @@ okno.configure(bg='khaki3')
 
 topFrame = Frame(okno)
 topFrame.pack()
-topFrame.configure(bg='khaki3')
+topFrame.configure(bg='gainsboro')
 
 bottomFrame = Frame(okno)
 bottomFrame.pack(side=BOTTOM)
-bottomFrame.configure(bg='khaki3')
+bottomFrame.configure(bg='gainsboro')
 scroll = Scrollbar(okno)
 scroll.pack(side= RIGHT, fill=Y)
-mylist = Listbox(okno, yscrollcommand = scroll.set, relief=FLAT, bg='khaki1', height=20)
-mylist.pack( fill = BOTH )
+mylist = Listbox(okno, yscrollcommand = scroll.set, relief=FLAT, bg='gainsboro', height=20)
+mylist.pack(fill=BOTH)
 scroll.config(command = mylist.yview)
 
 # tworzenie okna do wprowadzania danych
 
-wprowadz_tekst = Entry(topFrame, width=100)
+wprowadz_tekst = Entry(topFrame, width=100, bg='gainsboro')
 wprowadz_tekst.pack(side=BOTTOM)
 
 
@@ -162,60 +162,63 @@ def usun():
 myFont = font.Font(family='Verdana')
 # tworzenie przyciskow i przypisywanie do nich funkcji
 
-podaj_slowo = Label(topFrame, text='Podaj słowo', relief=FLAT, background='khaki2')
+podaj_slowo = Label(topFrame, text='Podaj słowo', relief=FLAT, background='gainsboro')
 
 szyfr = Szyfruj()
 
-deleteB = Button(bottomFrame, text='Usuń', command=usun)
+deleteB = Button(bottomFrame, text='Usuń', command=usun,
+                 background='SteelBlue3', activebackground='DeepSkyBlue4',
+                 activeforeground='snow', relief=FLAT
+                 )
 
 
 przycisk_sz_cezar = Button(bottomFrame, text='Szyfr Cezara', command=szyfr.et_szyfr_cezar,
-                           background='khaki4', activebackground='black', activeforeground='khaki1',
-                           relief=FLAT
+                           background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                           relief=FLAT, width=15
                            )
 przycisk_desz_cezar = Button(bottomFrame, text='Deszyfrowanie Cezar', command=szyfr.et_deszyfr_cezar,
-                             background='khaki4', activebackground='black', activeforeground='khaki1',
-                             relief=FLAT
+                             background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                             relief=FLAT, width=19
                              )
 
 przycisk_sz_base64 = Button(bottomFrame, text='Szyfr Base64', command=szyfr.et_szyfr_base64,
-                            background='khaki4', activebackground='black', activeforeground='khaki1',
-                            relief=FLAT
+                            background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                            relief=FLAT, width=15
                             )
 
 przycisk_desz_base64 = Button(bottomFrame, text='Deszyfrowanie Base64', command=szyfr.et_deszyfr_base64,
-                              background='khaki4', activebackground='black', activeforeground='khaki1',
-                              relief=FLAT
+                              background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                              relief=FLAT, width=19
                               )
 
 przycisk_sz_4kw = Button(bottomFrame, text='Szyfr Beauforta', command=szyfr.et_szyfruj,
-                         background='khaki4', activebackground='black', activeforeground='khaki1',
-                         relief=FLAT
+                         background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                         relief=FLAT, width=15
                          )
 
 przycisk_desz_4kw = Button(bottomFrame, text='Deszyfrowanie Beaufort', command=szyfr.et_deszyfruj,
-                           background='khaki4', activebackground='black', activeforeground='khaki1',
-                           relief=FLAT
+                           background='SteelBlue3', activebackground='DeepSkyBlue4', activeforeground='snow',
+                           relief=FLAT, width=19
                            )
 podaj_slowo['font'] = myFont
 podaj_slowo.pack(side=TOP)
 
 przycisk_sz_cezar['font'] = myFont
 przycisk_desz_cezar['font'] = myFont
-przycisk_sz_cezar.grid(row=1, column=1, padx=5, pady=5)
-przycisk_desz_cezar.grid(row=1, column=2, padx=5, pady=5)
+przycisk_sz_cezar.grid(row=1, column=1, pady=5)
+przycisk_desz_cezar.grid(row=1, column=3, pady=5)
 
 przycisk_sz_base64['font'] = myFont
 przycisk_desz_base64['font'] = myFont
-przycisk_sz_base64.grid(row=2, column=1, padx=5, pady=5)
-przycisk_desz_base64.grid(row=2, column=2, padx=5, pady=5)
+przycisk_sz_base64.grid(row=2, column=1, pady=5)
+przycisk_desz_base64.grid(row=2, column=3, pady=5)
 
 przycisk_sz_4kw['font'] = myFont
 przycisk_desz_4kw['font'] = myFont
-przycisk_sz_4kw.grid(row=3, column=1, padx=5, pady=5)
-przycisk_desz_4kw.grid(row=3, column=2, padx=5, pady=5)
+przycisk_sz_4kw.grid(row=3, column=1, pady=5)
+przycisk_desz_4kw.grid(row=3, column=3, pady=5)
 
 deleteB['font'] = myFont
-deleteB.grid(row=4, column=1, padx=5, pady=5)
+deleteB.grid(row=4, column=2, padx=5, pady=5)
 
 okno.mainloop()
